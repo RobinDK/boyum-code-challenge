@@ -1,0 +1,1508 @@
+{
+    "pipes": [
+        {
+            "name": "DateFormatPipe",
+            "id": "pipe-DateFormatPipe-e6049917520f197f080cef73cf67095cbcbc2eadf48d0256d4ab086018aaf4790dd0e54a8bf17a1dfba55072f7d78f4b22ab904a497192aaa802b0dacba25305",
+            "file": "src/app/pipes/date-format.pipe.ts",
+            "type": "pipe",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "transform",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "SafeHtml",
+                    "typeParameters": [],
+                    "line": 11,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "standalone": false,
+            "ngname": "dateFormat",
+            "sourceCode": "import { DomSanitizer, SafeHtml } from '@angular/platform-browser';\r\nimport { Pipe, PipeTransform } from '@angular/core';\r\n\r\n@Pipe({\r\n  name: 'dateFormat'\r\n})\r\nexport class DateFormatPipe implements PipeTransform {\r\n\r\n  constructor(private sanitizer: DomSanitizer) { }\r\n\r\n  transform(value: number): SafeHtml {\r\n    let date = new Date(Number(value));\r\n    let dateFormat = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();\r\n\r\n    if (isNaN(Number(date.getMonth() + 1)) || isNaN(Number(date.getDate())) || isNaN(Number(date.getFullYear()))) {\r\n      dateFormat = '<span class=\"badge bg-danger\">Invalid date</span>';\r\n    }\r\n    return this.sanitizer.bypassSecurityTrustHtml(dateFormat);\r\n  }\r\n}"
+        },
+        {
+            "name": "DaysSincePipe",
+            "id": "pipe-DaysSincePipe-de5dbe6b45ad7727e798c7791b987890581519810002efbea15247b227b2449fd131d4bf8d09f629bf558ca1069afbfd18cf8bea0e9a7605988c704658cc2a00",
+            "file": "src/app/pipes/days-since.pipe.ts",
+            "type": "pipe",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "transform",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "SafeHtml",
+                    "typeParameters": [],
+                    "line": 11,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "standalone": false,
+            "ngname": "daysSince",
+            "sourceCode": "import { DomSanitizer, SafeHtml } from '@angular/platform-browser';\r\nimport { Pipe, PipeTransform } from '@angular/core';\r\n\r\n@Pipe({\r\n  name: 'daysSince'\r\n})\r\nexport class DaysSincePipe implements PipeTransform {\r\n\r\n  constructor(private sanitizer: DomSanitizer) { }\r\n\r\n  transform(value: number): SafeHtml {\r\n\r\n    let createdDate = new Date(Number(value));\r\n\r\n    if (isNaN(Number(createdDate.getMonth() + 1)) || isNaN(Number(createdDate.getDate())) || isNaN(Number(createdDate.getFullYear()))) {\r\n      return '';\r\n    }\r\n\r\n    let currentDate = new Date();\r\n\r\n    let dateFormat = Math.round((currentDate.getTime() - createdDate.getTime()) / (1000 * 3600 * 24));\r\n\r\n    return this.sanitizer.bypassSecurityTrustHtml(`<strong>Days old</strong> ${dateFormat}`);\r\n\r\n  }\r\n}\r\n"
+        },
+        {
+            "name": "ProgressPipe",
+            "id": "pipe-ProgressPipe-ae55bfd85bda094af128631d209d15f860156296fcdfb61d35c8cbad60d32ac3d7308d1be186beb769c9751264a8c814eaff38efda9a8eb4215ac7469be35e46",
+            "file": "src/app/pipes/progress.pipe.ts",
+            "type": "pipe",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "transform",
+                    "args": [
+                        {
+                            "name": "status",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "SafeHtml",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "status",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "standalone": false,
+            "ngname": "progress",
+            "sourceCode": "import { DomSanitizer, SafeHtml } from '@angular/platform-browser';\r\nimport { Pipe, PipeTransform } from '@angular/core';\r\n\r\n@Pipe({\r\n  name: 'progress'\r\n})\r\n\r\nexport class ProgressPipe implements PipeTransform {\r\n\r\n  constructor(private sanitizer: DomSanitizer) { }\r\n\r\n  transform(status: boolean): SafeHtml {\r\n\r\n    let alert = '<span class=\"badge bg-success\">done</span>';\r\n\r\n    if (!status) {\r\n      alert = '<span class=\"badge bg-danger\">Todo</span>';\r\n    }\r\n\r\n    return this.sanitizer.bypassSecurityTrustHtml(alert);\r\n  }\r\n}\r\n"
+        }
+    ],
+    "interfaces": [
+        {
+            "name": "ToDoDetailsModel",
+            "id": "interface-ToDoDetailsModel-c625c9980047264add2cedf807048309dee95edead4819edd6014b7bc81c74324ce4b9c03697e18495026c480c901e77aa7e300f41807135d26efd9b6bc2076a",
+            "file": "src/app/models/todo-details.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { TodoListModel } from \"./todo-list\";\r\n\r\nexport interface ToDoDetailsModel extends TodoListModel {\r\n    Description?: string;\r\n    Expenses: number;\r\n}",
+            "properties": [
+                {
+                    "name": "Description",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "Expenses",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": [
+                "TodoListModel"
+            ]
+        },
+        {
+            "name": "TodoListModel",
+            "id": "interface-TodoListModel-39824e556e5d3ff0d1c35812d66b8a581b762b21e555ef07f3083b8ec62b40c062f54137695e56d6be21fc44a9a791991b530bd24a75d800b7240c4f6ef5f665",
+            "file": "src/app/models/todo-list.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface TodoListModel {\r\n    Id: number;\r\n    Name: string;\r\n    Done: boolean;\r\n    Created: number;\r\n}",
+            "properties": [
+                {
+                    "name": "Created",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "Done",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "Id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "Name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "User",
+            "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
+            "file": "src/stories/user.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface User {\n  name: string;\n}\n",
+            "properties": [
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "TodosService",
+            "id": "injectable-TodosService-2e324a6c4737a042e53119d28d2866f385f9b4c8418f695fe35caee84edf8a0a77e61f5418bfc6fb3b1085d102ba18e610d2c89954bdd1285b9d81f17bbcbd2c",
+            "file": "src/app/services/todos.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "GetToDoDetails",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable<ToDoDetailsModel[]>",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "GetToDoList",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<TodoListModel[]>",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { HttpClient } from '@angular/common/http';\r\nimport { Injectable } from '@angular/core';\r\nimport { TodoListModel } from '../models/todo-list';\r\nimport { Observable, catchError, map } from 'rxjs';\r\nimport { ToDoDetailsModel } from '../models/todo-details';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class TodosService {\r\n\r\n  constructor(\r\n    private http: HttpClient\r\n  ) { }\r\n\r\n  GetToDoList(): Observable<TodoListModel[]> {\r\n    let url = 'https://boyumcodechallenge.azurewebsites.net/api/todolist';\r\n    return this.http.get<TodoListModel[]>(url).pipe(catchError((err, caught) => caught));\r\n  }\r\n\r\n  GetToDoDetails(id: number): Observable<ToDoDetailsModel[]> {\r\n    let url = 'https://boyumcodechallenge.azurewebsites.net/api/todolist';\r\n    return this.http.get<ToDoDetailsModel[]>(url).pipe(map(x => x.filter(i => i.Id == id)), catchError((err, caught) => caught));\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 10,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-e677ef6e9e0af06901109cf5a0380e229bb5d66c8a70a38507adc507c07c32515cad42f548fe0f459f14342e90fdf35873f0ac0f7e49237f33f34438a5b29f65",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "title",
+                    "defaultValue": "'boyum-code-challenge'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n  styleUrl: './app.component.scss'\r\n})\r\nexport class AppComponent {\r\n  title = 'boyum-code-challenge';\r\n}\r\n",
+            "styleUrl": "./app.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-12\">\r\n      <router-outlet />\r\n    </div>\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-86e2311c54fbca7431c12e070d0fd5b0ebe343eec0553a392f182ba0e04a8f86613233d26ee47718fd0e7a65078f580c76a1fcc928ce55de81193d6618025bc4",
+            "file": "src/stories/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-button",
+            "styleUrls": [
+                "./button.css"
+            ],
+            "styles": [],
+            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nWhat background color to use\n",
+                    "description": "<p>What background color to use</p>\n",
+                    "line": 29,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "pos": 798,
+                            "end": 811,
+                            "flags": 16842752,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 334,
+                            "tagName": {
+                                "pos": 799,
+                                "end": 807,
+                                "flags": 16842752,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 80,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "rawdescription": "\n\nButton contents\n\n",
+                    "description": "<p>Button contents</p>\n",
+                    "line": 43,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nIs this the principal call to action on the page?\n",
+                    "description": "<p>Is this the principal call to action on the page?</p>\n",
+                    "line": 23,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nHow large should the button be?\n",
+                    "description": "<p>How large should the button be?</p>\n",
+                    "line": 35,
+                    "type": "\"small\" | \"medium\" | \"large\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nOptional click handler\n",
+                    "description": "<p>Optional click handler</p>\n",
+                    "line": 49,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  standalone: true,\n  imports: [CommonModule],\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "styleUrl": "./button.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 51
+                    }
+                }
+            }
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-cad94b233ec8e80ceb541e7972c5f9737e08237b4e137112f3987ca48ee0cce5c0d57798d41daa5d4d24d6bdbb2df1606ab68cca2aa0a1785e38f99f3cac0729",
+            "file": "src/stories/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "template": "<header>    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            [primary]=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 69,
+                    "type": "User | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 78,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 72,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 75,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ButtonComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { ButtonComponent } from './button.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-header',\n  standalone: true,\n  imports: [CommonModule, ButtonComponent],\n  template: `<header>\n    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            [primary]=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-header {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.storybook-header svg {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header h1 {\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header button + button {\n  margin-left: 10px;\n}\n\n.storybook-header .welcome {\n  color: #333;\n  font-size: 14px;\n  margin-right: 10px;\n}\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "PageComponent",
+            "id": "component-PageComponent-d32b0f19628254ea3fc5526c4d4564ada1cc83cf936759006d90a46f5874b02a3359e331bddda20b22e74a616a6443c660602ba74dd38ebe1160759e0de6f7ba",
+            "file": "src/stories/page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-page",
+            "styleUrls": [
+                "./page.css"
+            ],
+            "styles": [],
+            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "User | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 69
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "doCreateAccount",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 75,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "HeaderComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\nimport { HeaderComponent } from './header.component';\nimport type { User } from './user';\n\n@Component({\n  selector: 'storybook-page',\n  standalone: true,\n  imports: [CommonModule, HeaderComponent],\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-page {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\n.storybook-page h2 {\n  font-weight: 700;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-page p {\n  margin: 1em 0;\n}\n\n.storybook-page a {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\n.storybook-page ul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\n.storybook-page li {\n  margin-bottom: 8px;\n}\n\n.storybook-page .tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.storybook-page .tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.storybook-page .tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.storybook-page .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "styleUrl": "./page.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "TodoDetailsComponent",
+            "id": "component-TodoDetailsComponent-fc0cd2c215715eddcdabc28736b7c7aaa6c7e12f4fbd3a31753abc628cdd4a4e79caf0effaf161d9a37e11e44b5cccb1814c830bf803bacd61b4f7679b4dfc5a",
+            "file": "src/app/todos/components/todo-details/todo-details.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-todo-details",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./todo-details.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "itemId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "toDoDetail",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ToDoDetailsModel[] | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\nimport { ActivatedRoute } from '@angular/router';\r\nimport { TodosService } from '../../../services/todos.service';\r\nimport { ToDoDetailsModel } from '../../../models/todo-details';\r\nimport { take } from 'rxjs';\r\n\r\n@Component({\r\n  selector: 'app-todo-details',\r\n  templateUrl: './todo-details.component.html',\r\n  styleUrl: './todo-details.component.scss'\r\n})\r\nexport class TodoDetailsComponent implements OnInit {\r\n\r\n  toDoDetail: ToDoDetailsModel[] | undefined = [];\r\n  itemId!: number;\r\n\r\n  constructor(\r\n    private route: ActivatedRoute,\r\n    private todos: TodosService\r\n  ) {\r\n  }\r\n\r\n  ngOnInit(): void {\r\n\r\n    this.route.params.subscribe(params =>\r\n      this.itemId = params['id']\r\n    );\r\n\r\n    this.todos.GetToDoDetails(this.itemId)\r\n      .pipe(take(1))\r\n      .subscribe({\r\n        next: results => {\r\n          this.toDoDetail = results;\r\n        },\r\n        error: error => {\r\n          console.error(error);\r\n        }\r\n      });\r\n  }\r\n}\r\n",
+            "styleUrl": "./todo-details.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "todos",
+                        "type": "TodosService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 15,
+                "jsdoctags": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "todos",
+                        "type": "TodosService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p class=\"h2 mb-5\">Details</p>\r\n<div class=\"row\">\r\n    @for (detail of toDoDetail; track detail.Id)\r\n    {\r\n    <div *ngIf=\"detail.Name\" class=\"col-12 d-flex align-items-center\">\r\n        <p class=\"h5 mb-0 d-inline-block\">{{detail.Name}}</p>\r\n        <div class=\"mx-2 d-inline-block\" [innerHTML]=\"detail.Done | progress\"></div>\r\n    </div>\r\n    <div *ngIf=\"detail.Description\" class=\"col-12 mt-3\">\r\n        {{detail.Description}}\r\n    </div>\r\n    <div class=\"col-12 mt-5\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2 col-12\">\r\n                <strong>Id</strong> {{detail.Id}}\r\n            </div>\r\n            <div class=\"col-md-3 col-12\">\r\n                <strong>Expenses</strong> {{detail.Expenses | number: '2.0-2'}}\r\n            </div>\r\n            <div class=\"col-md-3 col-12\">\r\n                <strong>Created date</strong>&nbsp;<span [innerHTML]=\"detail.Created | dateFormat\"></span>\r\n            </div>\r\n            <div class=\"col-md-4 col-12\" [innerHTML]=\"detail.Created | daysSince\"></div>\r\n        </div>\r\n    </div>\r\n    }\r\n</div>"
+        },
+        {
+            "name": "TodoListComponent",
+            "id": "component-TodoListComponent-9de51d78c77082ca5a4b99f252da743368ccbb8654e64a1ef740dc9f25a8e4aac9f9c991bddf8fd7f3c8361c8bdba32d8f5b730e9ed2d0e0cb1fe3b9cf550c6b",
+            "file": "src/app/todos/components/todo-list/todo-list.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-todo-list",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./todo-list.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "toDoList",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "TodoListModel[] | undefined",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "statusChanged",
+                    "defaultValue": "new EventEmitter<object>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "toogleStatus",
+                    "args": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "status",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\r\nimport { TodoListModel } from '../../../models/todo-list';\r\n\r\n@Component({\r\n  selector: 'app-todo-list',\r\n  templateUrl: './todo-list.component.html',\r\n  styleUrl: './todo-list.component.scss'\r\n})\r\nexport class TodoListComponent {\r\n\r\n  @Input() toDoList: TodoListModel[] | undefined = [];\r\n  @Output() statusChanged = new EventEmitter<object>();\r\n\r\n  toogleStatus(name: string, status: boolean): void {\r\n    this.statusChanged.emit({ name: name, status: status });\r\n  }\r\n}\r\n",
+            "styleUrl": "./todo-list.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<!-- <p>todo-list works!</p>\r\n\r\n<ul>\r\n    @for (item of toDoList; track item.Id) {\r\n      <li>\r\n        <a [routerLink]=\"['details', item.Id]\">{{item.Name}}</a><br>\r\n\r\n        <div [innerHTML]=\"item.Created | dateFormat\"></div>\r\n\r\n      </li>\r\n    }\r\n  </ul>\r\n  \r\n\r\n\r\n{{ toDoList | json }} -->\r\n\r\n<div class=\"table-responsive\">\r\n  <table class=\"table table-hover\">\r\n    <thead>\r\n      <tr>\r\n        <th>Done</th>\r\n        <th>Id</th>\r\n        <th>Name</th>\r\n        <th>Created date</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      @for (item of toDoList; track item.Id)\r\n      {<tr>\r\n        <td>\r\n          <input class=\"form-check-input\" id=\"done\" name=\"done\" type=\"checkbox\"\r\n            (change)=\"toogleStatus(item.Name, item.Done)\" [(ngModel)]=\"item.Done\" />\r\n        </td>\r\n        <td>{{item.Id}}</td>\r\n        <td><a [routerLink]=\"['details', item.Id]\">{{item.Name}}</a></td>\r\n        <td [innerHTML]=\"item.Created | dateFormat\"></td>\r\n      </tr>\r\n      }\r\n    </tbody>\r\n  </table>\r\n</div>"
+        },
+        {
+            "name": "TodosComponent",
+            "id": "component-TodosComponent-4855b15f3c4bbf6e348fedac13ac14bb04137110118c5673cd2bbaec0f68b34dda382ab8fb841be5cf6db016bbc4dd539ab24aa238cbd920ba43c1597b2ea20c",
+            "file": "src/app/todos/todos.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-todos",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./todos.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "generalForm",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormGroup",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "submitted",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "toDoList",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TodoListModel[] | undefined",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onSubmit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 56,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "randomIntFromInterval",
+                    "args": [
+                        {
+                            "name": "min",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "max",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 76,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "min",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "max",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "statusChanged",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "object | any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "object | any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\nimport { TodoListModel } from '../models/todo-list';\r\nimport { TodosService } from '../services/todos.service';\r\nimport { take } from 'rxjs';\r\nimport { ToastrService } from 'ngx-toastr';\r\nimport { FormBuilder, FormGroup, Validators } from '@angular/forms';\r\n\r\n@Component({\r\n  selector: 'app-todos',\r\n  templateUrl: './todos.component.html',\r\n  styleUrl: './todos.component.scss'\r\n})\r\nexport class TodosComponent implements OnInit {\r\n  toDoList: TodoListModel[] | undefined = [];\r\n\r\n  generalForm!: FormGroup;\r\n  submitted = false;\r\n\r\n  get f() {\r\n    return this.generalForm.controls;\r\n  }\r\n\r\n  constructor(\r\n    private fb: FormBuilder,\r\n    private todos: TodosService,\r\n    private toastr: ToastrService\r\n  ) { }\r\n\r\n  ngOnInit(): void {\r\n    this.todos.GetToDoList()\r\n      .pipe(take(1))\r\n      .subscribe({\r\n        next: results => {\r\n          this.toDoList = results;\r\n        },\r\n        error: error => {\r\n          console.error(error);\r\n        }\r\n      });\r\n\r\n    this.generalForm = this.fb.group({\r\n      name: ['', Validators.required],\r\n      expenses: ['', Validators.pattern(\"^[0-9]*$\")],\r\n      description: [''],\r\n    });\r\n  }\r\n\r\n  statusChanged(event: object | any): void {\r\n    if (event.status) {\r\n      this.toastr.success(`'${event.name}' has been marked as 'done'`, 'Update!');\r\n    } else {\r\n      this.toastr.error(`'${event.name}' has been marked as 'work in progress'`, 'Update!');\r\n    }\r\n  }\r\n\r\n  onSubmit(): void {\r\n\r\n    this.submitted = true;\r\n\r\n    if (this.generalForm.valid) {\r\n      const date = new Date();\r\n      var e = {\r\n        Id: this.randomIntFromInterval(10, 99),\r\n        Name: this.generalForm?.get('name')?.value,\r\n        Description: this.generalForm.get('description')?.value,\r\n        Done: false,\r\n        Expenses: this.generalForm.get('expenses')?.value,\r\n        Created: date.getTime()\r\n      };\r\n      this.toDoList!.push(e);\r\n\r\n      this.toastr.success('A new entry has been created!', 'Success!');\r\n    }\r\n  }\r\n\r\n  randomIntFromInterval(min: number, max: number): number {\r\n    return Math.floor(Math.random() * (max - min + 1) + min);\r\n  }\r\n\r\n}\r\n",
+            "styleUrl": "./todos.component.scss",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "todos",
+                        "type": "TodosService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "fb",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "todos",
+                        "type": "TodosService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "implements": [
+                "OnInit"
+            ],
+            "accessors": {
+                "f": {
+                    "name": "f",
+                    "getSignature": {
+                        "name": "f",
+                        "type": "",
+                        "returnType": "",
+                        "line": 19
+                    }
+                }
+            },
+            "templateData": "<p class=\"h2 mb-5\">List</p>\r\n<app-todo-list [toDoList]=\"toDoList\" (statusChanged)=\"statusChanged($event)\" />\r\n\r\n<p class=\"h2 my-5\">Create new entry</p>\r\n<form class=\"row g-3\" [formGroup]=\"generalForm\" (ngSubmit)=\"onSubmit()\">\r\n    <div class=\"col-md-6\">\r\n        <label for=\"name\" class=\"form-label\">Name</label>\r\n        <input class=\"form-control\" id=\"name\" name=\"name\" formControlName=\"name\" id=\"InstanceName\" [ngClass]=\"{\r\n          'is-invalid': (f.name.touched || submitted) && f.name.errors?.required\r\n        }\" />\r\n        <span class=\"text-danger\" *ngIf=\"(f.name.touched || submitted) && f.name.errors?.required\">\r\n            Name is required!\r\n        </span>\r\n\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n        <label for=\"expenses\" class=\"form-label\">Cost</label>\r\n        <input class=\"form-control\" id=\"expenses\" name=\"expenses\" formControlName=\"expenses\" [ngClass]=\"{\r\n          'is-invalid': (f.expenses.touched || submitted) && f.expenses.errors?.pattern\r\n        }\" />\r\n        <span class=\"text-danger\" *ngIf=\"(f.name.touched || submitted) && f.name.errors?.pattern\">\r\n            Digits only!\r\n        </span>\r\n    </div>\r\n    <div class=\"col-12\">\r\n        <label for=\"inputAddress\" class=\"form-label\">Description</label>\r\n        <textarea class=\"form-control\" id=\"description\" name=\"description\" formControlName=\"description\"\r\n            rows=\"3\"></textarea>\r\n    </div>\r\n    <div class=\"col-12\">\r\n        <button type=\"submit\" class=\"btn btn-primary\">Create Entry</button>\r\n    </div>\r\n</form>"
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-25e59539dc69a8143c00103e7f4211ed4b0d92a87de1c5b607e6fee4ba1163b3950b0075b84170079495393cd03cebba75bd27c4d443142694269f71021b187d",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule, provideClientHydration } from '@angular/platform-browser';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nimport { AppRoutingModule } from './app-routing.module';\r\nimport { AppComponent } from './app.component';\r\nimport { TodosComponent } from './todos/todos.component';\r\nimport { TodoListComponent } from './todos/components/todo-list/todo-list.component';\r\nimport { TodoDetailsComponent } from './todos/components/todo-details/todo-details.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { DateFormatPipe } from './pipes/date-format.pipe';\r\nimport { DaysSincePipe } from './pipes/days-since.pipe';\r\nimport { ProgressPipe } from './pipes/progress.pipe';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { TodosModule } from './todos/todos.module';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    TodosComponent,\r\n    TodoListComponent,\r\n    TodoDetailsComponent,\r\n    DateFormatPipe,\r\n    DaysSincePipe,\r\n    ProgressPipe\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    CommonModule,\r\n    HttpClientModule,\r\n    AppRoutingModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    TodosModule\r\n  ],\r\n  providers: [\r\n    provideClientHydration()\r\n  ],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "DateFormatPipe"
+                        },
+                        {
+                            "name": "DaysSincePipe"
+                        },
+                        {
+                            "name": "ProgressPipe"
+                        },
+                        {
+                            "name": "TodoDetailsComponent"
+                        },
+                        {
+                            "name": "TodoListComponent"
+                        },
+                        {
+                            "name": "TodosComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "AppRoutingModule"
+                        },
+                        {
+                            "name": "TodosModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppRoutingModule",
+            "id": "module-AppRoutingModule-376bf5125fa83af776d38c8f0af454b54b29b73fa00e4bbb1e5bd5648256d46ad84e987a78c6b6da74525e11dcf32342a9c732318a8b675f75233ce356a34fa0",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { RouterModule, Routes } from '@angular/router';\r\nimport { TodosComponent } from './todos/todos.component';\r\nimport { TodoDetailsComponent } from './todos/components/todo-details/todo-details.component';\r\n\r\nconst routes: Routes = [\r\n  {\r\n    path: '',\r\n    redirectTo: 'todos',\r\n    pathMatch: 'full'\r\n  },\r\n  {\r\n    path: 'todos',\r\n    component: TodosComponent,\r\n  },\r\n  {\r\n    path: 'todos/details/:id',\r\n    component: TodoDetailsComponent,\r\n    pathMatch: 'full'\r\n  }\r\n];\r\n\r\n@NgModule({\r\n  imports: [RouterModule.forRoot(routes)],\r\n  exports: [RouterModule]\r\n})\r\nexport class AppRoutingModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppServerModule",
+            "id": "module-AppServerModule-986fca524dfcaaa9633204ade5cfdc7610224d752637e5fef11da0797f6422c726c34dc74d3f4ab92c8d38231de0b9a4b9a7505820a5c0bd18ba2ab1222ba5f4",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.server.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { ServerModule } from '@angular/platform-server';\r\n\r\nimport { AppModule } from './app.module';\r\nimport { AppComponent } from './app.component';\r\nimport { TodosService } from './services/todos.service';\r\n\r\n@NgModule({\r\n  imports: [\r\n    AppModule,\r\n    ServerModule,\r\n  ],\r\n  providers: [TodosService],\r\n  bootstrap: [AppComponent],\r\n})\r\nexport class AppServerModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": [
+                        {
+                            "name": "TodosService"
+                        }
+                    ]
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "AppModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "TodosModule",
+            "id": "module-TodosModule-cabf90188d1371b5d4d635a9656a6b1c1b885ea2f0ed6b0ab5fdb216a61ce5bf6a76494ccdec8e9454ccd7be6e77565e7c8e9709b44fee5b90346baaf0d3a598",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/todos/todos.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { ToastrModule } from 'ngx-toastr';\r\n\r\n@NgModule({\r\n  imports: [\r\n    CommonModule,\r\n    BrowserAnimationsModule,\r\n    ToastrModule.forRoot({\r\n      timeOut: 1500,\r\n      positionClass: 'toast-bottom-right',\r\n      preventDuplicates: true,\r\n    })\r\n  ],\r\n})\r\nexport class TodosModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "appConfig",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.config.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ApplicationConfig",
+                "defaultValue": "{\r\n  providers: [\r\n    provideHttpClient(withFetch())\r\n  ]\r\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/app/app.config.ts": [
+                {
+                    "name": "appConfig",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.config.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ApplicationConfig",
+                    "defaultValue": "{\r\n  providers: [\r\n    provideHttpClient(withFetch())\r\n  ]\r\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": [],
+    "coverage": {
+        "count": 5,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.config.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "appConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/models/todo-details.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ToDoDetailsModel",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/models/todo-list.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "TodoListModel",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pipes/date-format.pipe.ts",
+                "type": "pipe",
+                "linktype": "pipe",
+                "name": "DateFormatPipe",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pipes/days-since.pipe.ts",
+                "type": "pipe",
+                "linktype": "pipe",
+                "name": "DaysSincePipe",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pipes/progress.pipe.ts",
+                "type": "pipe",
+                "linktype": "pipe",
+                "name": "ProgressPipe",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/todos.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "TodosService",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/todos/components/todo-details/todo-details.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TodoDetailsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/todos/components/todo-list/todo-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TodoListComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/todos/todos.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TodosComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/stories/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/user.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            }
+        ]
+    }
+}

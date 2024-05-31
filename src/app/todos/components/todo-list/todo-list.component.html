@@ -1,0 +1,42 @@
+<!-- <p>todo-list works!</p>
+
+<ul>
+    @for (item of toDoList; track item.Id) {
+      <li>
+        <a [routerLink]="['details', item.Id]">{{item.Name}}</a><br>
+
+        <div [innerHTML]="item.Created | dateFormat"></div>
+
+      </li>
+    }
+  </ul>
+  
+
+
+{{ toDoList | json }} -->
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Done</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Created date</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of toDoList; track item.Id)
+      {<tr>
+        <td>
+          <input class="form-check-input" id="done" name="done" type="checkbox"
+            (change)="toogleStatus(item.Name, item.Done)" [(ngModel)]="item.Done" />
+        </td>
+        <td>{{item.Id}}</td>
+        <td><a [routerLink]="['details', item.Id]">{{item.Name}}</a></td>
+        <td [innerHTML]="item.Created | dateFormat"></td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

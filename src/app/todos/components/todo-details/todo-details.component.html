@@ -1,0 +1,27 @@
+<p class="h2 mb-5">Details</p>
+<div class="row">
+    @for (detail of toDoDetail; track detail.Id)
+    {
+    <div *ngIf="detail.Name" class="col-12 d-flex align-items-center">
+        <p class="h5 mb-0 d-inline-block">{{detail.Name}}</p>
+        <div class="mx-2 d-inline-block" [innerHTML]="detail.Done | progress"></div>
+    </div>
+    <div *ngIf="detail.Description" class="col-12 mt-3">
+        {{detail.Description}}
+    </div>
+    <div class="col-12 mt-5">
+        <div class="row">
+            <div class="col-md-2 col-12">
+                <strong>Id</strong> {{detail.Id}}
+            </div>
+            <div class="col-md-3 col-12">
+                <strong>Expenses</strong> {{detail.Expenses | number: '2.0-2'}}
+            </div>
+            <div class="col-md-3 col-12">
+                <strong>Created date</strong>&nbsp;<span [innerHTML]="detail.Created | dateFormat"></span>
+            </div>
+            <div class="col-md-4 col-12" [innerHTML]="detail.Created | daysSince"></div>
+        </div>
+    </div>
+    }
+</div>

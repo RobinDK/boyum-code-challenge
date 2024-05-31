@@ -1,0 +1,33 @@
+<p class="h2 mb-5">List</p>
+<app-todo-list [toDoList]="toDoList" (statusChanged)="statusChanged($event)" />
+
+<p class="h2 my-5">Create new entry</p>
+<form class="row g-3" [formGroup]="generalForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-6">
+        <label for="name" class="form-label">Name</label>
+        <input class="form-control" id="name" name="name" formControlName="name" id="InstanceName" [ngClass]="{
+          'is-invalid': (f.name.touched || submitted) && f.name.errors?.required
+        }" />
+        <span class="text-danger" *ngIf="(f.name.touched || submitted) && f.name.errors?.required">
+            Name is required!
+        </span>
+
+    </div>
+    <div class="col-md-6">
+        <label for="expenses" class="form-label">Cost</label>
+        <input class="form-control" id="expenses" name="expenses" formControlName="expenses" [ngClass]="{
+          'is-invalid': (f.expenses.touched || submitted) && f.expenses.errors?.pattern
+        }" />
+        <span class="text-danger" *ngIf="(f.name.touched || submitted) && f.name.errors?.pattern">
+            Digits only!
+        </span>
+    </div>
+    <div class="col-12">
+        <label for="inputAddress" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" formControlName="description"
+            rows="3"></textarea>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Create Entry</button>
+    </div>
+</form>
